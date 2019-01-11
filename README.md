@@ -5,3 +5,5 @@
 - AI plays it by itself using genetic algorithm to solve it.
 - User can also play it, get's info of how good his move was
 - Developed for web first, using Java Script
+- Chart JS for statistics
+- OPbjects can be layed out in horizontal line
