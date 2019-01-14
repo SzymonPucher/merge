@@ -16,3 +16,8 @@ section{
   margin: 10px auto;
   padding: 10px;
 }
+
+.additor{
+  width: 15px;
+  background-color: green;
+}
