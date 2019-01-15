@@ -26,19 +26,6 @@ function get_board() {
     return elem
 }
 
-function reset_ids(){
-    var pluses = document.getElementById('board').getElementsByTagName('div');
-    for (var i = 0; i < pluses.length; i++) {
-        pluses[i].id = i
-    }
-}
-
-function get_id_based_on_element_number(elem_num) {
-    return elem_num * 2 + 1;
-}
-
-
-
 function evaluate_board() {
     var b = get_board();
     console.log(b)
@@ -51,16 +38,13 @@ function evaluate_board() {
                 }
             }
             j = j - 1;
-
             if(j > 0){
                 var parent = document.getElementById("board");
-                var merge_res = parseInt(document.getElementById(get_id_based_on_element_number(i) + j*2).innerHTML) + parseInt(document.getElementById(get_id_based_on_element_number(i) - j*2).innerHTML)
-                for(var k = get_id_based_on_element_number(i) - j*2; k < get_id_based_on_element_number(i) + j*2; k++) {
-                    console.log(document.getElementById(k));
+                k = i - j*2;
+                for(k; k < i + j*2; k++) {
                     var child = document.getElementById(k);
                     parent.removeChild(child);
                 }
-                document.getElementById(get_id_based_on_element_number(i) + j*2).innerHTML = merge_res
             }
         }
     }
@@ -83,8 +67,15 @@ document.addEventListener('click', function (e) {
         parentElement.insertBefore(additor, parentElement.children[target.id]);
         next_elem = get_next_elem();
     }
-    reset_ids();
+    var pluses = document.getElementById('board').getElementsByTagName('div');
+    for (var i = 0; i < pluses.length; i++) {
+        pluses[i].id = i
+    }
     evaluate_board();
+    var pluses = document.getElementById('board').getElementsByTagName('div');
+    for (var i = 0; i < pluses.length; i++) {
+        pluses[i].id = i
+    }
     var b = get_board();
     if(b.length > 18){
         document.getElementById('board').style.display = "none";
