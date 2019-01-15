@@ -1,17 +1,19 @@
+
+points = 0;
+get_next_elem();
+document.getElementById('end').style.display = "none";
 function get_next_elem(){
     decision = Math.floor((Math.random() * 3) + 1);
     if(decision == 3){
         next_elem = 'plus'
     }
     else {
-        next_elem = Math.floor((Math.random() * 3) + 1);
+        next_elem = Math.floor((Math.random() * 3) + Math.floor(points/10) + 1);
     }
     document.getElementById('new_element').innerHTML = next_elem;
     return next_elem
 }
 
-get_next_elem();
-document.getElementById('end').style.display = "none";
 
 
 function get_board() {
@@ -37,40 +39,45 @@ function get_id_based_on_element_number(elem_num) {
     return elem_num * 2 + 1;
 }
 
-
-
 function evaluate_board() {
     var b = get_board();
-    console.log(b)
     for(var i = 0; i < b.length; i++){
         if(b[i] == 'plus' && i > 0 && i < b.length-1){
             var j = 1;
             for(j; j < b.length; j++) {
-                if (b[i - j] != b[i + j]) {
+                if (b[i - j] != b[i + j] || i - j < 0 || i + j == b.length) {
                         break;
                 }
             }
             j = j - 1;
 
             if(j > 0){
+                arr = [];
+                for(var m = i - j; m <= i + j; m++){
+                if(m != i){
+                        arr.push(b[m])
+                    }
+                }
                 var parent = document.getElementById("board");
-                var merge_res = parseInt(document.getElementById(get_id_based_on_element_number(i) + j*2).innerHTML) + parseInt(document.getElementById(get_id_based_on_element_number(i) - j*2).innerHTML)
                 for(var k = get_id_based_on_element_number(i) - j*2; k < get_id_based_on_element_number(i) + j*2; k++) {
-                    console.log(document.getElementById(k));
                     var child = document.getElementById(k);
                     parent.removeChild(child);
                 }
-                document.getElementById(get_id_based_on_element_number(i) + j*2).innerHTML = merge_res
+                document.getElementById(get_id_based_on_element_number(i) + j*2).innerHTML = Math.max.apply(null, arr) + j;
+                for( var t = 0; t < arr.length; t++){
+                    points += parseInt(arr[t]);
+                }
+                document.getElementById('points').innerHTML = points
             }
         }
     }
+    reset_ids();
 }
 
 document.addEventListener('click', function (e) {
 
     e = e || window.event;
     var target = e.target || e.srcElement;
-    console.log(target.id);
     if (target.className == 'additor') {
         var elem = document.createElement('div');
         elem.className = 'element';
