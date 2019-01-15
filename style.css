@@ -6,7 +6,7 @@ body{
 div{
   height: 50px;
   width: 50px;
-  margin: 10px;
+  margin: 1px;
   background-color: blue;
   display: inline-block;
 }
@@ -19,5 +19,14 @@ section{
 
 .additor{
   width: 15px;
-  background-color: green;
+  background-color: inherit;
+}
+
+.additor:hover{
+  width: 30px;
+}
+
+#end{
+  font-size: 50px;
+  background-color: black;
 }
