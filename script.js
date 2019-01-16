@@ -67,7 +67,7 @@ function evaluate_board() {
                 for( var t = 0; t < arr.length; t++){
                     points += parseInt(arr[t]);
                 }
-                document.getElementById('points').innerHTML = points
+                document.getElementById('points').innerHTML = points;
             }
         }
     }
