@@ -12,26 +12,45 @@ h2, h3{
 }
 
 #board{
-    border-radius: 20px;
+    border-radius: 50px;
     display: inline-block;
     background-color: #333;
-    margin: 10px auto;
+    margin: 15px auto;
     padding: 10px;
 }
-#points_container{
+#points{
     font-size: 30px;
     border: 3px ridge black;
-    border-radius: 20px;
+    border-radius: 45px;
     margin: 2px;
+    width: 300px;
+    height: 30px;
+    text-align: right;
+    line-height: 30px;
+    padding: 20px;
+}
+#end {
+    font-size: 50px;
+    background-color: black;
+}
+#points-label{
+    width: 200px;
+    text-align: left;
+    margin-left: 40px;
+    font-size: 12px;
+}
+#next-elem-label{
+    font-size: 12px;
+    margin-left: 115px;
 }
 .element{
     height: 28px;
-    width: 38px;
+    width: 50px;
     padding: 11px;
     margin: 2px;
-    border-radius: 20px;
+    border-radius: 30px;
     font-size: 25px;
-    background-color: #a42001;
+    background-color: #174001;
     border: 3px ridge black;
 }
 
@@ -51,7 +70,3 @@ h2, h3{
 
 }
 
-#end {
-    font-size: 50px;
-    background-color: black;
-}
