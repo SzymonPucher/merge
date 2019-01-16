@@ -1,32 +1,40 @@
-body{
-  background: #222;
-  color: #fff;
-  text-align: center;
-}
-div{
-  height: 50px;
-  width: 50px;
-  margin: 1px;
-  background-color: blue;
-  display: inline-block;
-}
-section{
-  display: inline-block;
-  background-color: #333;
-  margin: 10px auto;
-  padding: 10px;
+body {
+    background: #222;
+    color: #fff;
+    text-align: center;
 }
 
-.additor{
-  width: 15px;
-  background-color: inherit;
+div {
+    height: 50px;
+    width: 50px;
+    margin: 1px;
+    background-color: blue;
+    display: inline-block;
 }
 
-.additor:hover{
-  width: 30px;
+section {
+    display: inline-block;
+    background-color: #333;
+    margin: 10px auto;
+    padding: 10px;
 }
 
-#end{
-  font-size: 50px;
-  background-color: black;
+.additor {
+    width: 15px;
+    height: 50px;
+    background-color: inherit;
+    -webkit-transition: width .5s; /* Safari */
+    transition: width .5s;
+}
+
+.additor:hover {
+    width: 30px;
+    -webkit-transition: width .5s; /* Safari */
+    transition: width .5s;
+
+}
+
+#end {
+    font-size: 50px;
+    background-color: black;
 }
