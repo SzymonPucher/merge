@@ -18,7 +18,6 @@ function get_next_elem() {
     return next_elem
 }
 
-
 function get_board() {
     board = document.getElementById('board');
     elements = board.getElementsByClassName('element');
@@ -27,14 +26,13 @@ function get_board() {
     for (i = 0; i < elements.length; i++) {
         elem.push(elements[i].innerHTML)
     }
-
     return elem
 }
 
 function reset_ids() {
     var pluses = document.getElementById('board').getElementsByTagName('div');
     for (var i = 0; i < pluses.length; i++) {
-        pluses[i].id = i
+        pluses[i].id = i;
     }
 }
 
@@ -83,37 +81,45 @@ function evaluate_board() {
     }
 }
 
+function add_element(target) {
+    var elem = document.createElement('div');
+    elem.className = 'element';
+    elem.innerHTML = next_elem;
+    var additor = document.createElement('div');
+    additor.className = 'additor';
+    additor.innerHTML = '+';
+    var parentElement = document.getElementById('board');
+    parentElement.insertBefore(elem, parentElement.children[target.id]);
+    parentElement.insertBefore(additor, parentElement.children[target.id]);
+    next_elem = get_next_elem();
+}
+
+function delete_element(target) {
+    document.getElementById('board').removeChild(document.getElementById(parseInt(target.id) + 1));
+    document.getElementById('board').removeChild(document.getElementById(target.id));
+    next_elem = get_next_elem();
+}
+
+function game_over() {
+    document.getElementById('board').style.display = "none";
+    document.getElementById('new_element').style.display = "none";
+    document.getElementById('end').style.display = "inline-block";
+}
+
 document.addEventListener('click', function (e) {
     e = e || window.event;
     var target = e.target || e.srcElement;
-    console.log(next_elem);
-    if (next_elem === '-') {
-        if (target.className === 'element') {
-            document.getElementById('board').removeChild(document.getElementById(parseInt(target.id) + 1));
-            document.getElementById('board').removeChild(document.getElementById(target.id));
-            next_elem = get_next_elem();
-        }
+    if (next_elem === '-' && target.className === 'element') {
+        delete_element(target);
     }
     else if (target.className === 'additor') {
-        var elem = document.createElement('div');
-        elem.className = 'element';
-        elem.innerHTML = next_elem;
-        var additor = document.createElement('div');
-        additor.className = 'additor';
-        additor.innerHTML = '+';
-        var parentElement = document.getElementById('board');
-        parentElement.insertBefore(elem, parentElement.children[target.id]);
-        parentElement.insertBefore(additor, parentElement.children[target.id]);
-        next_elem = get_next_elem();
+        add_element(target)
     }
 
     reset_ids();
     evaluate_board();
-    var b = get_board();
-    if (b.length > 17) {
-        document.getElementById('board').style.display = "none";
-        document.getElementById('new_element').style.display = "none";
-        document.getElementById('end').style.display = "inline-block";
+    if (get_board().length > 17) {
+        game_over()
     }
 
 }, false);
