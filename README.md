@@ -14,3 +14,7 @@
 - minus
 - plus any
 - copy
+
+## Ideas
+
+- Running man visualization. By mergin elements, he gets shields.
