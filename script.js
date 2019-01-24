@@ -18,6 +18,19 @@ function get_next_elem() {
     return next_elem
 }
 
+function maximum_element(){
+    var b = get_board();
+    for(var i = 0; i < b.length; i++){
+        b[i] = parseInt(b[i]);
+    }
+
+    b = b.filter(function (value) {
+        return !Number.isNaN(value);
+    });
+    console.log(b);
+    document.getElementById('max_element').innerHTML = Math.max(b);
+}
+
 function get_board() {
     board = document.getElementById('board');
     elements = board.getElementsByClassName('element');
@@ -79,6 +92,7 @@ function evaluate_board() {
         }
         reset_ids();
     }
+    maximum_element();
 }
 
 function add_element(target) {
