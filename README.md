@@ -18,4 +18,4 @@
 ## Ideas
 
 - Running man visualization. By mergin elements, he gets shields to break through walls.
-- Add indicatior of existing elements for that can be merged.
+- Add indicatior of existing elements for that can be merged. (underline and shining border)
