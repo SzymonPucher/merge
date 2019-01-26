@@ -18,11 +18,11 @@ function get_next_elem() {
     return next_elem
 }
 
-function maximum_element(){
+function maximum_element() {
     var b = get_board();
     var max = 0;
-    for(var i = 0; i < b.length; i++){
-        if(parseInt(b[i]) > max){
+    for (var i = 0; i < b.length; i++) {
+        if (parseInt(b[i]) > max) {
             max = parseInt(b[i]);
         }
     }
@@ -106,6 +106,11 @@ function add_element(target) {
     next_elem = get_next_elem();
 }
 
+function copy_element(target) {
+    next_elem = target.innerHTML;
+    document.getElementById('new_element').innerHTML = next_elem;
+}
+
 function delete_element(target) {
     document.getElementById('board').removeChild(document.getElementById(parseInt(target.id) + 1));
     document.getElementById('board').removeChild(document.getElementById(target.id));
@@ -121,8 +126,20 @@ function game_over() {
 document.addEventListener('click', function (e) {
     e = e || window.event;
     var target = e.target || e.srcElement;
-    if (next_elem === '-' && target.className === 'element') {
-        delete_element(target);
+    if (next_elem === '-') {
+        if (target.className === 'element') {
+            delete_element(target);
+        }
+    }
+    else if (next_elem === 'C') {
+        if (target.className === 'element') {
+            copy_element(target);
+        }
+    }
+    else if (next_elem === 'X') {
+        if (target.className === 'additor') {
+            add_element(target);
+        }
     }
     else if (target.className === 'additor') {
         add_element(target)
