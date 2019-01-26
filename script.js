@@ -1,5 +1,6 @@
 points = 0;
 get_next_elem();
+maximum_element();
 document.getElementById('end').style.display = "none";
 var last_plus = 0;
 
@@ -69,16 +70,22 @@ function evaluate_board() {
             if (b[i] === '+' || b[i] === 'X' && i > 0 && i < b.length - 1) {
                 var j = 1;
                 if(b[i] === 'X'){
+                    var double_X_test = 0;
                     if(b[i-1] === '+' || b[i-1] === 'X'){
                         b[i-1] = 1;
+                        double_X_test++;
                     }
                     if(b[i+1] === '+' || b[i+1] === 'X'){
                         b[i+1] = 1;
+                        double_X_test++;
+                    }
+                    if(double_X_test === 2){
+                        break
                     }
                     j = 2;
                 }
                 for (j; j < b.length; j++) {
-                    if (b[i - j] !== b[i + j] || i - j < 0 || i + j === b.length || b[i - j] === '+' || b[i + j] === '+') {
+                    if (b[i - j] !== b[i + j] || i - j < 0 || i + j === b.length || b[i - j] === '+' || b[i + j] === '+' || b[i - j] === 'X' || b[i + j] === 'X') {
                         break;
                     }
                 }
