@@ -1,15 +1,24 @@
 points = 0;
 get_next_elem();
 document.getElementById('end').style.display = "none";
+last_plus = 0;
 
 function get_next_elem() {
-    decision = Math.floor((Math.random() * 15));
+    decision = Math.floor((Math.random() * 20)) - last_plus;
     var level = Math.floor(Math.sqrt(points) / 10) + 1;
+    last_plus++;
     if (decision < 5) {
-        next_elem = '+'
+        next_elem = '+';
+        last_plus = 0;
     }
     else if (decision === 5 && get_board().length > 2) {
         next_elem = '-'
+    }
+    else if (decision === 6) {
+        next_elem = 'C'
+    }
+    else if (decision === 7 && get_board().length > 2) {
+        next_elem = 'X'
     }
     else {
         next_elem = Math.floor((Math.random() * 3) + level);
@@ -57,8 +66,11 @@ function evaluate_board() {
         is_changed = false;
         var b = get_board();
         for (var i = 0; i < b.length; i++) {
-            if (b[i] === '+' && i > 0 && i < b.length - 1) {
+            if (b[i] === '+' || b[i] === 'X' && i > 0 && i < b.length - 1) {
                 var j = 1;
+                if(b[i] === 'X'){
+                    j = 2;
+                }
                 for (j; j < b.length; j++) {
                     if (b[i - j] !== b[i + j] || i - j < 0 || i + j === b.length || b[i - j] === '+' || b[i + j] === '+') {
                         break;
