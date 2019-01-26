@@ -29,6 +29,11 @@ h2, h3{
     line-height: 30px;
     padding: 20px;
 }
+
+#max_element{
+    background-color: darkred;
+}
+
 #end {
     font-size: 50px;
     background-color: black;
@@ -69,4 +74,5 @@ h2, h3{
     transition: width .5s;
 
 }
+
 
