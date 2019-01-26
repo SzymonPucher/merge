@@ -20,15 +20,13 @@ function get_next_elem() {
 
 function maximum_element(){
     var b = get_board();
+    var max = 0;
     for(var i = 0; i < b.length; i++){
-        b[i] = parseInt(b[i]);
+        if(parseInt(b[i]) > max){
+            max = parseInt(b[i]);
+        }
     }
-
-    b = b.filter(function (value) {
-        return !Number.isNaN(value);
-    });
-    console.log(b);
-    document.getElementById('max_element').innerHTML = Math.max(b);
+    document.getElementById('max_element').innerHTML = max;
 }
 
 function get_board() {
@@ -54,9 +52,9 @@ function get_id_based_on_element_number(elem_num) {
 }
 
 function evaluate_board() {
-    var is_changed = 1;
+    var is_changed = true;
     while (is_changed) {
-        is_changed = 0;
+        is_changed = false;
         var b = get_board();
         for (var i = 0; i < b.length; i++) {
             if (b[i] === '+' && i > 0 && i < b.length - 1) {
@@ -71,7 +69,7 @@ function evaluate_board() {
                 if (j > 0) {
                     arr = [];
                     for (var m = i - j; m <= i + j; m++) {
-                        if (m != i) {
+                        if (m !== i) {
                             arr.push(b[m])
                         }
                     }
@@ -79,7 +77,7 @@ function evaluate_board() {
                     for (var k = get_id_based_on_element_number(i) - j * 2; k < get_id_based_on_element_number(i) + j * 2; k++) {
                         var child = document.getElementById(k);
                         parent.removeChild(child);
-                        is_changed = 1;
+                        is_changed = true;
                     }
                     document.getElementById(get_id_based_on_element_number(i) + j * 2).innerHTML = Math.max.apply(null, arr) + j;
                     for (var t = 0; t < arr.length; t++) {
