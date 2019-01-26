@@ -1,7 +1,7 @@
 points = 0;
 get_next_elem();
 document.getElementById('end').style.display = "none";
-last_plus = 0;
+var last_plus = 0;
 
 function get_next_elem() {
     decision = Math.floor((Math.random() * 20)) - last_plus;
@@ -69,6 +69,12 @@ function evaluate_board() {
             if (b[i] === '+' || b[i] === 'X' && i > 0 && i < b.length - 1) {
                 var j = 1;
                 if(b[i] === 'X'){
+                    if(b[i-1] === '+' || b[i-1] === 'X'){
+                        b[i-1] = 1;
+                    }
+                    if(b[i+1] === '+' || b[i+1] === 'X'){
+                        b[i+1] = 1;
+                    }
                     j = 2;
                 }
                 for (j; j < b.length; j++) {
