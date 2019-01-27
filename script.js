@@ -3,7 +3,6 @@ get_next_elem();
 maximum_element();
 document.getElementById('end').style.display = "none";
 var last_plus = 0;
-var last_minus = 0;
 
 function get_next_elem() {
     var decision = Math.floor((Math.random() * 20)) - last_plus;
@@ -13,22 +12,19 @@ function get_next_elem() {
         next_elem = '+';
         last_plus = 0;
     }
-    else if (decision === 5 && get_board().length > 3 && last_minus > 2) {
+    else if (decision === 5 && get_board().length > 2) {
         next_elem = '-';
-        last_minus = 0;
     }
     else if (decision === 6) {
         next_elem = 'C';
     }
-    else if (decision === 7 && get_board().length > 2) {
+    else if (decision === 7) {
         next_elem = 'X';
     }
     else {
-        next_elem = Math.floor((Math.random() * 3) + level);
+        next_elem = Math.floor((Math.random() * 4) + level);
     }
-    last_minus++;
     document.getElementById('new_element').innerHTML = next_elem;
-    return next_elem
 }
 
 function maximum_element() {
@@ -132,7 +128,6 @@ function add_element(target) {
     var parentElement = document.getElementById('board');
     parentElement.insertBefore(elem, parentElement.children[target.id]);
     parentElement.insertBefore(additor, parentElement.children[target.id]);
-    next_elem = get_next_elem();
 }
 
 function copy_element(target) {
@@ -143,7 +138,6 @@ function copy_element(target) {
 function delete_element(target) {
     document.getElementById('board').removeChild(document.getElementById(parseInt(target.id) + 1));
     document.getElementById('board').removeChild(document.getElementById(target.id));
-    next_elem = get_next_elem();
 }
 
 function game_over() {
@@ -155,23 +149,28 @@ function game_over() {
 document.addEventListener('click', function (e) {
     e = e || window.event;
     var target = e.target || e.srcElement;
+    var change = false;
     if (next_elem === '-') {
         if (target.className === 'element') {
             delete_element(target);
+            change = true;
         }
     }
     else if (next_elem === 'C') {
         if (target.className === 'element') {
             copy_element(target);
+            return
         }
     }
     else if (next_elem === 'X') {
         if (target.className === 'additor') {
             add_element(target);
+            change = true;
         }
     }
     else if (target.className === 'additor') {
-        add_element(target)
+        add_element(target);
+        change = true;
     }
 
     reset_ids();
@@ -179,5 +178,8 @@ document.addEventListener('click', function (e) {
     if (get_board().length > 17 || get_board().length < 1) {
         game_over()
     }
-x
+    if(change) {
+        get_next_elem();
+    }
+
 }, false);
