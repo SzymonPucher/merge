@@ -3,27 +3,30 @@ get_next_elem();
 maximum_element();
 document.getElementById('end').style.display = "none";
 var last_plus = 0;
+var last_minus = 0;
 
 function get_next_elem() {
-    decision = Math.floor((Math.random() * 20)) - last_plus;
+    var decision = Math.floor((Math.random() * 20)) - last_plus;
     var level = Math.floor(Math.sqrt(points) / 10) + 1;
     last_plus++;
     if (decision < 5) {
         next_elem = '+';
         last_plus = 0;
     }
-    else if (decision === 5 && get_board().length > 2) {
-        next_elem = '-'
+    else if (decision === 5 && get_board().length > 3 && last_minus > 2) {
+        next_elem = '-';
+        last_minus = 0;
     }
     else if (decision === 6) {
-        next_elem = 'C'
+        next_elem = 'C';
     }
     else if (decision === 7 && get_board().length > 2) {
-        next_elem = 'X'
+        next_elem = 'X';
     }
     else {
         next_elem = Math.floor((Math.random() * 3) + level);
     }
+    last_minus++;
     document.getElementById('new_element').innerHTML = next_elem;
     return next_elem
 }
@@ -33,10 +36,11 @@ function maximum_element() {
     var max = 0;
     for (var i = 0; i < b.length; i++) {
         if (parseInt(b[i]) > max) {
-            max = parseInt(b[i]);
+            max = b[i];
         }
     }
     document.getElementById('max_element').innerHTML = max;
+    return parseInt(max)
 }
 
 function get_board() {
@@ -106,7 +110,7 @@ function evaluate_board() {
                     }
                     document.getElementById(get_id_based_on_element_number(i) + j * 2).innerHTML = Math.max.apply(null, arr) + j;
                     for (var t = 0; t < arr.length; t++) {
-                        points += parseInt(arr[t]);
+                        points += parseInt(arr[t]) * Math.ceil(maximum_element() / 5);
                     }
                     document.getElementById('points').innerHTML = points;
 
@@ -172,8 +176,8 @@ document.addEventListener('click', function (e) {
 
     reset_ids();
     evaluate_board();
-    if (get_board().length > 17) {
+    if (get_board().length > 17 || get_board().length < 1) {
         game_over()
     }
-
+x
 }, false);
