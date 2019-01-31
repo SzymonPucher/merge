@@ -75,4 +75,15 @@ h2, h3{
 
 }
 
+.chart_box {
+    margin: auto;
+    height: 300px;
+    min-width: 300px;
+    width: 80%;
+    background-color: #222;
+    border: 5px ridge #333;
+    border-radius: 10px;
+
+}
+
 
