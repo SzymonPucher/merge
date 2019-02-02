@@ -95,6 +95,7 @@ function get_id_based_on_element_number(elem_num) {
     return elem_num * 2 + 1;
 }
 
+
 function evaluate_board() {
     reset_ids();
     var is_changed = true;
@@ -228,7 +229,7 @@ document.addEventListener('click', function (e) {
 
 function AI_make_move(){
     var b = get_board();
-    
+
 }
 
 
