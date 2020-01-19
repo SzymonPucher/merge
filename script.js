@@ -38,6 +38,40 @@ points_chart = new Chart(ctx, {
     }
 });
 
+var ctx = document.getElementById('max_points_chart').getContext('2d');
+
+
+max_points_chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+    scaleStartValue: 0,
+    // The data for our dataset
+    data: {
+        labels: [0],
+        datasets: [{
+            label: "Max points",
+            backgroundColor: "rgb(25, 22, 240, 0.5)",
+            data: [0]
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        title: {
+            display: true,
+            fontSize: 15,
+            padding: 10,
+            text: 'Amount of max points over moves'
+        },
+        scales: {
+            yAxes: [{
+                display: true,
+            }]
+        }
+    }
+});
+
 function get_next_elem() {
     var decision = Math.floor((Math.random() * 20)) - last_plus;
     var level = Math.floor(Math.sqrt(points) / 10) + 1;
@@ -224,6 +258,7 @@ document.addEventListener('click', function (e) {
     if(action(target)){
         evaluate_board();
         addData(points_chart, ++move_count, points);
+        addData(max_points_chart, ++move_count, maximum_element())
     }
 }, false);
 
