@@ -23,7 +23,8 @@ points_chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
-        responsive: true, maintainAspectRatio: false,
+        responsive: true,
+        maintainAspectRatio: false,
         title: {
             display: true,
             fontSize: 15,
@@ -57,7 +58,8 @@ max_points_chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
-        responsive: true, maintainAspectRatio: false,
+        responsive: true,
+        maintainAspectRatio: false,
         title: {
             display: true,
             fontSize: 15,
@@ -79,17 +81,13 @@ function get_next_elem() {
     if (decision < 5) {
         next_elem = '+';
         last_plus = 0;
-    }
-    else if (decision === 5 && get_board().length > 2) {
+    } else if (decision === 5 && get_board().length > 2) {
         next_elem = '-';
-    }
-    else if (decision === 6) {
+    } else if (decision === 6) {
         next_elem = 'C';
-    }
-    else if (decision === 7) {
+    } else if (decision === 7) {
         next_elem = 'X';
-    }
-    else {
+    } else {
         next_elem = Math.floor((Math.random() * 4) + level);
     }
     document.getElementById('new_element').innerHTML = next_elem;
@@ -229,13 +227,11 @@ function action(target) {
         if (next_elem === '-') {
             delete_element(target.id);
             return true
-        }
-        else if (next_elem === 'C') {
+        } else if (next_elem === 'C') {
             copy_element(target);
             return false
         }
-    }
-    else if (target.className === 'additor' && next_elem !== '-' && next_elem !== 'C') {
+    } else if (target.className === 'additor' && next_elem !== '-' && next_elem !== 'C') {
         add_element(target.id);
         return true
     }
@@ -243,7 +239,7 @@ function action(target) {
 }
 
 function addData(chart, label, data) {
-    var chart_labels =  chart.data.labels;
+    var chart_labels = chart.data.labels;
     chart_labels.push(label);
     chart.data.labels = chart_labels.slice(-30);
     var chart_data = chart.data.datasets[0].data;
@@ -252,20 +248,17 @@ function addData(chart, label, data) {
     chart.update();
 }
 
-document.addEventListener('click', function (e) {
+document.addEventListener('click', function(e) {
     e = e || window.event;
     var target = e.target || e.srcElement;
-    if(action(target)){
+    if (action(target)) {
         evaluate_board();
         addData(points_chart, ++move_count, points);
         addData(max_points_chart, ++move_count, maximum_element())
     }
 }, false);
 
-function AI_make_move(){
+function AI_make_move() {
     var b = get_board();
 
 }
-
-
-
